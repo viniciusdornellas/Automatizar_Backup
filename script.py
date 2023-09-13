@@ -57,10 +57,10 @@ def compara_datas(caminho):
             escrever_arquivo(caminhoBackUpTo)
 
 #Variáveis que contém os caminhos e permitem fácil alteração sem precisar alterar as linhas de código
-caminho = 'C:/valcann/backupsFrom'
-caminhoBackUp = 'C:/valcann/backupsTo'
-caminhoBackUpFrom = 'C:/valcann/backupsFrom.log'
-caminhoBackUpTo = 'C:/valcann/backupsTo.log'
+caminho = 'home/valcann/backupsFrom'
+caminhoBackUp = 'home/valcann/backupsTo'
+caminhoBackUpFrom = 'home/valcann/backupsFrom.log'
+caminhoBackUpTo = 'home/valcann/backupsTo.log'
 
 #Chama função passando o caminho da pasta backupsFrom
 dados = dados_arquivo(caminho)
