@@ -1,23 +1,28 @@
-import os 
+import os, shutil 
 import datetime
-import shutil
 
 #Função para buscar os dados do arquivo, recebe o caminho e retorna os dados em uma lista
 def dados_arquivo(caminho):
     dados = []
-    #Laço for para percorrer todos os arquivos do caminho recebido
-    for item in os.listdir(caminho):
-        arquivo = os.path.join(caminho, item) 
-        #Verificar se o item é um arquivo
-        if os.path.isfile(arquivo):
-            dados_arquivo = {
-                "Nome": item,
-                "Tamanho:": os.path.getsize(arquivo),
-                "Criacao": datetime.datetime.fromtimestamp(os.path.getctime(arquivo)),
-                "Data de Modificacao": datetime.datetime.fromtimestamp(os.path.getmtime(arquivo))
-            }
-            #O resultado de cada laço é armazenado na lista "dados"
-            dados.append(dados_arquivo)
+    try:
+        # Verifica se o caminho existe
+        if not os.path.exists(caminho):
+            raise Exception("O caminho especificado não existe.")
+        # Laço for para percorrer todos os arquivos do caminho recebido
+        for item in os.listdir(caminho):
+            arquivo = os.path.join(caminho, item)
+            # Verificar se o item é um arquivo
+            if os.path.isfile(arquivo):
+                dados_arquivo = {
+                    "Nome": item,
+                    "Tamanho:": os.path.getsize(arquivo),
+                    "Criacao": datetime.datetime.fromtimestamp(os.path.getctime(arquivo)),
+                    "Data de Modificacao": datetime.datetime.fromtimestamp(os.path.getmtime(arquivo))
+                }
+                # O resultado de cada laço é armazenado na lista "dados"
+                dados.append(dados_arquivo)
+    except Exception as e:
+        print(f"Erro ao buscar dados do arquivo: {e}")
     return dados
 
 #Função para escrever em um arquivo. Recebe o caminho como parâmetro 
@@ -52,10 +57,10 @@ def compara_datas(caminho):
             escrever_arquivo(caminhoBackUpTo)
 
 #Variáveis que contém os caminhos e permitem fácil alteração sem precisar alterar as linhas de código
-caminho = 'home/valcann/backupsFrom'
-caminhoBackUp = 'home/valcann/backupsTo'
-caminhoBackUpFrom = 'home/valcann/backupsFrom.log'
-caminhoBackUpTo = 'home/valcann/backupsTo.log'
+caminho = 'C:/valcann/backupsFrom'
+caminhoBackUp = 'C:/valcann/backupsTo'
+caminhoBackUpFrom = 'C:/valcann/backupsFrom.log'
+caminhoBackUpTo = 'C:/valcann/backupsTo.log'
 
 #Chama função passando o caminho da pasta backupsFrom
 dados = dados_arquivo(caminho)
